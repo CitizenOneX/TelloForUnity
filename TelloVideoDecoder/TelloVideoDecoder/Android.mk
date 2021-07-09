@@ -4,9 +4,9 @@ include $(CLEAR_VARS)
 LOCAL_PATH      := $(NDK_PROJECT_PATH)
 LOCAL_MODULE    := avutil
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/include
-LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavutil.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavutil.a
 
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
 # ------------------------------------ libavformat
 include $(CLEAR_VARS)
@@ -14,9 +14,9 @@ include $(CLEAR_VARS)
 LOCAL_PATH      := $(NDK_PROJECT_PATH)
 LOCAL_MODULE    := avformat
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/include
-LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavformat.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavformat.a
 
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
 # ------------------------------------ libavcodec
 include $(CLEAR_VARS)
@@ -24,9 +24,9 @@ include $(CLEAR_VARS)
 LOCAL_PATH      := $(NDK_PROJECT_PATH)
 LOCAL_MODULE    := avcodec
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/include
-LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavcodec.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libavcodec.a
 
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
 # ------------------------------------ libswscale
 include $(CLEAR_VARS)
@@ -34,9 +34,9 @@ include $(CLEAR_VARS)
 LOCAL_PATH      := $(NDK_PROJECT_PATH)
 LOCAL_MODULE    := swscale
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/include
-LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libswscale.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libswscale.a
 
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
 # ------------------------------------ libswresample
 include $(CLEAR_VARS)
@@ -44,9 +44,9 @@ include $(CLEAR_VARS)
 LOCAL_PATH      := $(NDK_PROJECT_PATH)
 LOCAL_MODULE    := swresample
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/include
-LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libswresample.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/ffmpeg-android-prebuilt/lib/libswresample.a
 
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
 # ------------------------------------ libx264
 include $(CLEAR_VARS)
@@ -82,8 +82,7 @@ LOCAL_LDLIBS    := \
 #	-lavformat -lavcodec -lswresample -lswscale -lavutil -lx264
 # -Wl,--no-warn-shared-textrel
 
-LOCAL_SHARED_LIBRARIES := avutil avcodec avformat swresample swscale
-LOCAL_STATIC_LIBRARIES := x264
+LOCAL_STATIC_LIBRARIES := avutil avcodec avformat swresample swscale x264
 
 APP_ALLOW_MISSING_DEPS=false
 
