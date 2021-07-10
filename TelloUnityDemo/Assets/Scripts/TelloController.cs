@@ -67,6 +67,7 @@ public class TelloController : SingletonMonoBehaviour<TelloController> {
 
 	override protected void Awake()
 	{
+		Debug.Log("TelloController Awake");
 		if (!isLoaded) {
 			DontDestroyOnLoad(this.gameObject);
 			isLoaded = true;
@@ -80,6 +81,7 @@ public class TelloController : SingletonMonoBehaviour<TelloController> {
 		if (telloVideoTexture == null)
 			telloVideoTexture = FindObjectOfType<TelloVideoTexture>();
 
+		Debug.Log("TelloController Awake finished");
 	}
 
 	private void OnEnable()
@@ -90,20 +92,23 @@ public class TelloController : SingletonMonoBehaviour<TelloController> {
 
 	private void Start()
 	{
+		Debug.Log("TelloController Start");
 		if (telloVideoTexture == null)
 			telloVideoTexture = FindObjectOfType<TelloVideoTexture>();
 
 		Tello.startConnecting();
+		Debug.Log("TelloController Start finished");
 	}
 
 	void OnApplicationQuit()
 	{
+		Debug.Log("TelloController OnApplicationQuit");
 		Tello.stopConnecting();
+		Debug.Log("TelloController OnApplicationQuit finished");
 	}
 
 	// Update is called once per frame
 	void Update () {
-
 		if (Input.GetKeyDown(KeyCode.T)) {
 			Tello.takeOff();
 		} else if (Input.GetKeyDown(KeyCode.L)) {
@@ -140,19 +145,18 @@ public class TelloController : SingletonMonoBehaviour<TelloController> {
 			lx = -1;
 		}
 		Tello.controllerState.setAxis(lx, ly, rx, ry);
-
 	}
 
 	private void Tello_onUpdate(int cmdId)
 	{
 		//throw new System.NotImplementedException();
-		Debug.Log("Tello_onUpdate : " + Tello.state);
+		//Debug.Log("Tello_onUpdate : " + Tello.state);
 	}
 
 	private void Tello_onConnection(Tello.ConnectionState newState)
 	{
 		//throw new System.NotImplementedException();
-		//Debug.Log("Tello_onConnection : " + newState);
+		Debug.Log("Tello_onConnection : " + newState);
 		if (newState == Tello.ConnectionState.Connected) {
             Tello.queryAttAngle();
             Tello.setMaxHeight(50);
@@ -162,11 +166,11 @@ public class TelloController : SingletonMonoBehaviour<TelloController> {
 			//Tello.setEV(0);
 			Tello.requestIframe();
 		}
+		Debug.Log("TelloController Tello_onConnection finished");
 	}
 
 	private void Tello_onVideoData(byte[] data)
 	{
-		//Debug.Log("Tello_onVideoData: " + data.Length);
 		if (telloVideoTexture != null)
 			telloVideoTexture.PutVideoData(data);
 	}

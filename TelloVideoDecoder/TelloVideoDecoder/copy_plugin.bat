@@ -1,0 +1,1 @@
+copy libs\armeabi-v7a\libTelloVideoDecoder.so ..\..\TelloUnityDemo\Assets\Plugins\Android\libTelloVideoDecoder.so

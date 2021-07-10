@@ -19,6 +19,7 @@ extern "C" {
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
 #include <libavutil/imgutils.h>
+#include <libavutil/error.h>
 }
 
 #ifdef UNITY_WIN
@@ -131,8 +132,8 @@ public:
 				}
 				while ((*isRunning) && avcodec_receive_frame(codec_context, frame) == 0) {
 					sws_scale(convert_context, (const uint8_t* const*)frame->data, frame->linesize, 0, codec_context->height, frame_rgba->data, frame_rgba->linesize);
-					stringstream ss;
-					ss << "Decoded frame: " << (unsigned long)frameCounter << " width: " << codec_context->width << " height: " << codec_context->height;
+					//stringstream ss;
+					//ss << "Decoded frame: " << (unsigned long)frameCounter << " width: " << codec_context->width << " height: " << codec_context->height;
 #if 1
 					if (codec_context->height > 0) {
 
@@ -161,7 +162,7 @@ public:
 					}
 #endif
 
-					debug_log(ss.str().c_str());
+					//debug_log(ss.str().c_str());
 
 					{
 						lock_guard<mutex> lock(*mtx);
@@ -205,9 +206,9 @@ public:
 				int size = min<int>(f->size, buf_size);
 				if (size > 2) {
 
-					stringstream ss;
-					ss << "VideoData data[0]: " << (int)f->buffer[0] << " data[1]: " << (int)f->buffer[1];
-					debug_log(ss.str().c_str());
+					//stringstream ss;
+					//ss << "VideoData data[0]: " << (int)f->buffer[0] << " data[1]: " << (int)f->buffer[1];
+					//debug_log(ss.str().c_str());
 
 					size -= 2;
 					memcpy(buf, f->buffer + 2, size);
@@ -244,7 +245,11 @@ private:
 		int ret;
 		ret = avformat_open_input(&fmt_ctx, nullptr, nullptr, nullptr);
 		if (ret < 0) {
-			debug_log("Could not open input\n");
+			char errbuf[100];
+			av_strerror(ret, errbuf, sizeof(errbuf));
+			stringstream ss;
+			ss << "Could not open input: " << errbuf << "\n";
+			debug_log(ss.str().c_str());
 			close();
 			return false;
 		}
