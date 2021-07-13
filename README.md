@@ -1,6 +1,6 @@
 # TelloForUnity
 
-A Ryze Tech/DJI Tello application development resources for Unity.
+A Ryze Tech/DJI Tello application development resources for Unity / Nreal (Android)
 
 ## Note
 
@@ -9,9 +9,9 @@ This project is including the following modules.
 * Forked and modified source code of [TelloLib](https://github.com/comoc/TelloLib). The original version is [Kagrathea's TelloLib](https://github.com/Kragrathea/TelloLib).
 * Modified source code of [NativeRenderingPlugin](https://bitbucket.org/Unity-Technologies/graphicsdemos/src/default/NativeRenderingPlugin/)
 * Pre-built DLLs for Windows 64 bit of [FFmpeg](https://www.ffmpeg.org/)
+* Nreal SDK
 
-At this time, Windows 64 bit and macOS 64 bit versions are supported.
-Android (including Oculus Go) version is experimentally supported.
+Windows 64 bit and macOS 64 bit versions may continue to work, unless they get broken by the Nreal (Android) changes.
 
 ## Installation
 
