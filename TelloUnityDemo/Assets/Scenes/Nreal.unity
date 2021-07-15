@@ -685,6 +685,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 352448847}
+  RightOffsetRadians: 0.2
+  UpOffsetRadians: 0.125
+  OffsetDistance: 0.6
 --- !u!4 &2041186670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4161419129834002, guid: d97c49c3194f17a418d70b56d700d2a5,
